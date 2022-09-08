@@ -295,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519648785916993955, guid: c9266472a9310104dae655f42cb3859f, type: 3}
       propertyPath: m_Name
-      value: ClockHand (1)
+      value: ClockHandHour
       objectReference: {fileID: 0}
     - target: {fileID: 519648785916993966, guid: c9266472a9310104dae655f42cb3859f, type: 3}
       propertyPath: useDeltaTime
@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519648785916993955, guid: c9266472a9310104dae655f42cb3859f, type: 3}
       propertyPath: m_Name
-      value: ClockHand
+      value: ClockHandMin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9266472a9310104dae655f42cb3859f, type: 3}
