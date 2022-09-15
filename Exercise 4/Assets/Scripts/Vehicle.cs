@@ -8,6 +8,11 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     float speed = 5f;
 
+    public Camera cam;
+    static float height;
+    float width;
+
+
 
     Vector3 vehiclePosition = new Vector3(0, 0, 0);
 
@@ -20,6 +25,8 @@ public class Vehicle : MonoBehaviour
     void Start()
     {
         vehiclePosition = transform.position;
+        height=  2f * cam.orthographicSize;
+        width = height * cam.aspect;
     }
 
     // Update is called once per frame
@@ -32,7 +39,25 @@ public class Vehicle : MonoBehaviour
         vehiclePosition += velocity;
         transform.position = vehiclePosition;
 
+        if(vehiclePosition.x < cam.transform.position.x - width / 2)
+        {
+            vehiclePosition.x = cam.transform.position.x + width / 2;
+        }
         
+        if (vehiclePosition.x > cam.transform.position.x + width / 2)
+        {
+            vehiclePosition.x = cam.transform.position.x - width / 2;
+        }
+
+        if (vehiclePosition.y < cam.transform.position.y - height / 2)
+        {
+            vehiclePosition.y = cam.transform.position.y + height / 2;
+        }
+
+        if (vehiclePosition.y > cam.transform.position.y + height / 2)
+        {
+            vehiclePosition.y = cam.transform.position.y - height / 2;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
