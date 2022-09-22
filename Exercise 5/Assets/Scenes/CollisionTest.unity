@@ -177,6 +177,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0355a979-0852-4a8b-92a0-4b4ba7e7bc3f
     m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 863989243}
+        m_TargetAssemblyTypeName: CollisionManager, Assembly-CSharp
+        m_MethodName: ChangeCollision
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b75a6eed-1853-4efe-97cd-8495f15ec233
+    m_ActionName: Player/CollisionToggle[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -480,6 +496,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f660b3b3e54f8342b088ea2064d3e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 391752197}
+  obsticalList:
+  - {fileID: 1369397867}
+  - {fileID: 712319950}
+  - {fileID: 1058945830}
 --- !u!1 &1058945830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5664826677708357903, guid: 92b093766dbc4e44885dfcf8e18b99e0, type: 3}

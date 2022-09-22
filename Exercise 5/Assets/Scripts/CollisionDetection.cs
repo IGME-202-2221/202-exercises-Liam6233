@@ -26,7 +26,7 @@ public class CollisionDetection : MonoBehaviour
 
     public bool CircleCollision(GameObject player, GameObject obstical)
     {
-        bool isColliding = false;
+        bool isColliding = true;
         return isColliding;
     }
 }
