@@ -15,4 +15,18 @@ public class CollisionDetection : MonoBehaviour
     {
         
     }
+
+    public bool AABBCollision(GameObject player, GameObject obstical)
+    {
+        bool areColliding = false;
+        
+
+        return areColliding;
+    }
+
+    public bool CircleCollision(GameObject player, GameObject obstical)
+    {
+        bool isColliding = false;
+        return isColliding;
+    }
 }
