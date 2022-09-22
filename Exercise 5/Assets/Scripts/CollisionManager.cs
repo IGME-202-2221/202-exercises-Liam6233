@@ -49,6 +49,7 @@ public class CollisionManager : MonoBehaviour
             {
                 shipColor.color = Color.red;
                 obsticalList[i].GetComponent<SpriteRenderer>().color = Color.red;
+                i = obsticalList.Count;
                 
             }
             else 
