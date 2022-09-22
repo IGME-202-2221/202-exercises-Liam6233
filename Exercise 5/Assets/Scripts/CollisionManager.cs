@@ -82,7 +82,7 @@ public class CollisionManager : MonoBehaviour
     public bool CircleCollision(GameObject player, GameObject obstical)
     {
         bool isColliding = false;
-        float playerRad = GetMaxVal(player.GetComponent<SpriteRenderer>().bounds.extents);
+        float playerRad = player.GetComponent<SpriteRenderer>().bounds.extents.x;
         float obRad = obstical.GetComponent<SpriteRenderer>().bounds.extents.y;
 
         float distance = Mathf.Pow(player.transform.position.x - obstical.transform.position.x, 2) 
@@ -93,17 +93,5 @@ public class CollisionManager : MonoBehaviour
 
         }
         return isColliding;
-    }
-
-    public float GetMaxVal(Vector3 vec)
-    {
-        if(vec.x > vec.y)
-        {
-            return vec.x;
-        }
-        else
-        {
-            return vec.y;
-        }
     }
 }
