@@ -49,6 +49,7 @@ public class CollisionManager : MonoBehaviour
             {
                 shipColor.color = Color.red;
                 obsticalList[i].GetComponent<SpriteRenderer>().color = Color.red;
+                
             }
             else 
             {
@@ -81,8 +82,8 @@ public class CollisionManager : MonoBehaviour
     public bool CircleCollision(GameObject player, GameObject obstical)
     {
         bool isColliding = false;
-        float playerRad = player.GetComponent<SpriteRenderer>().bounds.extents.x;
-        float obRad = obstical.GetComponent<SpriteRenderer>().bounds.extents.x;
+        float playerRad = GetMaxVal(player.GetComponent<SpriteRenderer>().bounds.extents);
+        float obRad = obstical.GetComponent<SpriteRenderer>().bounds.extents.y;
 
         float distance = Mathf.Pow(player.transform.position.x - obstical.transform.position.x, 2) 
             + Mathf.Pow(player.transform.position.y - obstical.transform.position.y, 2);
@@ -92,5 +93,17 @@ public class CollisionManager : MonoBehaviour
 
         }
         return isColliding;
+    }
+
+    public float GetMaxVal(Vector3 vec)
+    {
+        if(vec.x > vec.y)
+        {
+            return vec.x;
+        }
+        else
+        {
+            return vec.y;
+        }
     }
 }
