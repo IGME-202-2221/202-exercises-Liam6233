@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1153f985166bc35488c7325c79f712c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numAnimals: 10
   elPrefab: {fileID: 15287755340841121, guid: ce530f68216ebff4e95136287b4dff7a, type: 3}
   turtPrefab: {fileID: 8587727156226307406, guid: d74a60ea534c4d64a999fa35c0c88554, type: 3}
   snailPrefab: {fileID: 2810336513542096067, guid: 61dd36b0a6c3c514b9b3ecc0ce98b50e, type: 3}
@@ -665,7 +666,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607510041}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 101569683}
+        m_TargetAssemblyTypeName: SpawnManager, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1607510041
 MonoBehaviour:
   m_ObjectHideFlags: 0
