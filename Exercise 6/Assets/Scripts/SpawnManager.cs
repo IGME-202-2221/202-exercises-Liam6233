@@ -7,7 +7,8 @@ public class SpawnManager : MonoBehaviour
 
     private List<SpriteRenderer> animals = new List<SpriteRenderer>();
 
-    public int numAnimals = 10;
+    public int minAnimals = 10;
+    public int maxAnimals = 101;
 
     public SpriteRenderer elPrefab;
     public SpriteRenderer turtPrefab;
@@ -36,16 +37,13 @@ public class SpawnManager : MonoBehaviour
     public void Spawn()
     {
         CleanUp();
-
+        int numAnimals = Random.Range(minAnimals, maxAnimals);
         // set number of animals
         for(int i = 0; i < numAnimals; i++)
         {
             // place animal
-
-
             // add to list
             animals.Add(SpawnAnimal());
-
         }
     }
 
@@ -54,22 +52,30 @@ public class SpawnManager : MonoBehaviour
 
         SpriteRenderer randomAnimal = elPrefab;
 
-        float randNum = Random.Range(0, 1.1f);
-        if(randNum < 0.1f)
+        float randNum = Random.Range(0, 1f);
+        if (randNum < 0.1f)
         {
             randomAnimal = octoPrefab;
         }
-        if(randNum > 0.1f && randNum <= 0.25f)
+        if (randNum >= 0.1f && randNum < 0.25f)
         {
             randomAnimal = snailPrefab;
         }
-        
+        if (randNum >= 0.25f && randNum < 0.45f)
+        {
+            randomAnimal = turtPrefab;
+        }
+        if(randNum >= 0.45f && randNum < 0.75f)
+        {
+            randomAnimal = kangoPrefab;
+        }
 
         return randomAnimal;
     }
 
     private SpriteRenderer SpawnAnimal()
     {
+
         Vector3 animalPosition = new Vector3(Random.Range(minPosition.x, maxPosition.x),
             Random.Range(minPosition.y,maxPosition.y),
             0f);
