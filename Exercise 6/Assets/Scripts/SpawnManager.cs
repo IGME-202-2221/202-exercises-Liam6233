@@ -49,26 +49,36 @@ public class SpawnManager : MonoBehaviour
 
     private SpriteRenderer ChooseRandomAnimal()
     {
-
+        // starts as elephant
         SpriteRenderer randomAnimal = elPrefab;
+        
+        // gets random number between 0 (in) and 1 (ex)
+        float randNum = Random.Range(0f, 1f);
 
-        float randNum = Random.Range(0, 1f);
+        // based on that number, uses non-uniform random to choose which
+        // animal prefab to use. if num is greater than .75, then it stays elephant (25% chance)
+        
+        // 10% chance for octopus
         if (randNum < 0.1f)
         {
             randomAnimal = octoPrefab;
         }
-        if (randNum >= 0.1f && randNum < 0.25f)
+        // 15% chance for snail
+        else if (randNum < 0.25f)
         {
             randomAnimal = snailPrefab;
         }
-        if (randNum >= 0.25f && randNum < 0.45f)
+        // 20% chance for turtle
+        else if (randNum < 0.45f)
         {
             randomAnimal = turtPrefab;
         }
-        if(randNum >= 0.45f && randNum < 0.75f)
+        // 30% chance for kangaroo
+        else if(randNum < 0.75f)
         {
             randomAnimal = kangoPrefab;
         }
+
 
         return randomAnimal;
     }
@@ -76,11 +86,14 @@ public class SpawnManager : MonoBehaviour
     private SpriteRenderer SpawnAnimal()
     {
 
-        Vector3 animalPosition = new Vector3(Random.Range(minPosition.x, maxPosition.x),
-            Random.Range(minPosition.y,maxPosition.y),
-            0f);
+        // using guassian float for position which makes animals position be more centered around
+        // the middle of the scene
+        float gaussX = Gaussian(0f, 2f);
+        float gaussY = Gaussian(0f, 1.35f);
+        Vector3 animalPosition = new Vector3(gaussX, gaussY, 0f);
+        //Vector3 animalPosition = new Vector3(Random.Range(minPosition.x, maxPosition.x), Random.Range(minPosition.y,maxPosition.y), 0f);
 
-        SpriteRenderer spawnedAnimal = Instantiate(ChooseRandomAnimal(), animalPosition, Quaternion.identity);
+        SpriteRenderer spawnedAnimal = Instantiate(ChooseRandomAnimal(), animalPosition, Quaternion.identity, transform);
 
         spawnedAnimal.color = Random.ColorHSV(0f, 1f,1f,1f,1f,1f);
 
