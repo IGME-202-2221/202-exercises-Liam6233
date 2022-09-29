@@ -16,14 +16,14 @@ public class SpawnManager : MonoBehaviour
     public SpriteRenderer octoPrefab;
     public SpriteRenderer kangoPrefab;
 
-    private Vector3 minPosition;
-    private Vector3 maxPosition;
+    //private Vector3 minPosition;
+    //private Vector3 maxPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        minPosition = Camera.main.ScreenToWorldPoint(Vector3.zero);
-        maxPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+        //minPosition = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        //maxPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 
         Spawn();
     }
