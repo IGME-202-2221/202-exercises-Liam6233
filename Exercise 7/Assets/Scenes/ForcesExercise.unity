@@ -262,7 +262,7 @@ MonoBehaviour:
   - {fileID: 1211421290}
   - {fileID: 428080093}
   - {fileID: 495120343}
-  cam: {fileID: 203471474}
+  mousePos: {x: 0, y: 0, z: 0}
 --- !u!4 &705235161
 Transform:
   m_ObjectHideFlags: 0

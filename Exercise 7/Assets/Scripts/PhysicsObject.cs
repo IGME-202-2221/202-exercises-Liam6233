@@ -7,11 +7,10 @@ public class PhysicsObject : MonoBehaviour
 
 
     // fields
-    private Vector3 position;
-    private Vector3 direction;
-    private Vector3 velocity;
+    private Vector3 direction = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
     private Vector3 acceleration;
-    
+    Vector3 position = Vector3.negativeInfinity;
     
     [SerializeField] 
     public float mass;
@@ -25,7 +24,7 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField]
     bool gravityApplied;
 
-    float gravityStrength = -1;
+    float gravityStrength = -3;
 
     //needed for bounce method
     [SerializeField]
@@ -37,11 +36,24 @@ public class PhysicsObject : MonoBehaviour
     {
         height = 2f * cam.orthographicSize;
         width = height * cam.aspect;
+
+        position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        velocity += acceleration * Time.deltaTime;
+
+        position += velocity * Time.deltaTime;
+
+        direction = velocity.normalized;
+
+        transform.position = position;
+
+        acceleration = Vector3.zero;
+
+
         if (frictionApplied)
         {
             ApplyFriction(frictionCoef);
@@ -72,13 +84,13 @@ public class PhysicsObject : MonoBehaviour
 
     private void Bounce()
     {
-        if(transform.position.x < cam.transform.position.x - width / 2 
-            || transform.position.x > cam.transform.position.x + width / 2)
+        if(transform.position.x <= cam.transform.position.x - width / 2 
+            || transform.position.x >= cam.transform.position.x + width / 2)
         {
             velocity.x *= -1;
         }
-        if (transform.position.y < cam.transform.position.y - height / 2
-            || transform.position.y > cam.transform.position.y + height / 2)
+        if (transform.position.y <= cam.transform.position.y - height / 2
+            || transform.position.y >= cam.transform.position.y + height / 2)
         {
             velocity.y *= -1;
         }
@@ -86,13 +98,6 @@ public class PhysicsObject : MonoBehaviour
 
     public void ApplyForce(Vector3 force)
     {
-        acceleration += force;
-        velocity += acceleration * Time.deltaTime;
-        position += velocity * Time.deltaTime;
-        direction = velocity.normalized;
-
-        transform.position = position;
-        acceleration = Vector3.zero;
-
+        acceleration += force / mass;
     }
 }
