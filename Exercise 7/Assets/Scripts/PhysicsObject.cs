@@ -42,7 +42,16 @@ public class PhysicsObject : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (frictionApplied)
+        {
+            ApplyFriction(frictionCoef);
+        }
+        if (gravityApplied)
+        {
+            ApplyGravity(new Vector3(0, gravityStrength, 0));
+        }
+
         velocity += acceleration * Time.deltaTime;
 
         position += velocity * Time.deltaTime;
@@ -54,14 +63,7 @@ public class PhysicsObject : MonoBehaviour
         acceleration = Vector3.zero;
 
 
-        if (frictionApplied)
-        {
-            ApplyFriction(frictionCoef);
-        }
-        if (gravityApplied)
-        {
-            ApplyGravity(new Vector3(0, gravityStrength, 0));
-        }
+        
         Bounce();
 
     }
