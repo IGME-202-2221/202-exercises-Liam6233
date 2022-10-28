@@ -16,11 +16,13 @@ public class PhysicsObject : MonoBehaviour
     public Vector3 Position
     {
         get { return position; }
+       
     }
 
     public Vector3 Velocity
     {
         get { return velocity; }
+        set { velocity = value; }
     }
 
     public Vector3 Direction

@@ -28,7 +28,7 @@ public abstract class Agent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         totalSteeringForce = Vector3.zero;
         CalcSteeringForces();
