@@ -16,6 +16,7 @@ public class PhysicsObject : MonoBehaviour
     public Vector3 Position
     {
         get { return position; }
+        set { position = value; }
        
     }
 

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e40f726a05bf14b914411d43f2dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1
+  mass: 0.1
   frictionApplied: 0
   frictionCoef: 0
   gravityApplied: 0

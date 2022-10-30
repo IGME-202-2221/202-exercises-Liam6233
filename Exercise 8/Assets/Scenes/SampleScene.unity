@@ -257,10 +257,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObject: {fileID: 1145002150}
-  maxSpeed: 2
+  maxSpeed: 3
   maxForce: 2
   seekTarget: {fileID: 911587276}
-  caughtTarget: 1
+  caughtTarget: 0
 --- !u!114 &1145002150 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9088226328833811336, guid: 631955513a52bbc49896f88d1583cb1b, type: 3}
