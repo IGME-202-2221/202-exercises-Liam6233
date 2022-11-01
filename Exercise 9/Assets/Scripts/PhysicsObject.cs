@@ -9,7 +9,7 @@ public class PhysicsObject : MonoBehaviour
     // fields
     private Vector3 direction = Vector3.zero;
     private Vector3 velocity = Vector3.zero;
-    private Vector3 acceleration;
+    public Vector3 acceleration;
     Vector3 position = Vector3.negativeInfinity;
     
 
