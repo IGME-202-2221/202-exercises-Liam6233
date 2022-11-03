@@ -85,28 +85,13 @@ public abstract class Agent : MonoBehaviour
         pos = wanderPos;
         rad = wanderRad;
         float wanderAngle = Random.Range(0f, 360f);
-        wanderPos.x += Mathf.Cos(wanderAngle) * wanderRad;
-        wanderPos.y += Mathf.Sin(wanderAngle) * wanderRad;
+        wanderPos.x += Mathf.Cos(wanderAngle * Mathf.Deg2Rad) * wanderRad;
+        wanderPos.y += Mathf.Sin(wanderAngle * Mathf.Deg2Rad) * wanderRad;
 
         return Seek(wanderPos);
        
     }
 
-    public Vector3 Wander2()
-    {
-        float wanderAngle = Random.Range(-20f, 21f);
-        if(timer > 1)
-        {
-            float offset = Random.Range(-5f, 6f);
-            wanderAngle += offset;
-            timer = 0;
-        }
-        Vector3 wanderPos = physicsObject.Direction;
-
-        return Seek(wanderPos);
-        
-
-    }
     public Vector3 GetFuturePosition(float time)
     {
         // simplest way to calculate it is by multiplying current velocity by time
@@ -140,7 +125,7 @@ public abstract class Agent : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(pos, rad);
-        Gizmos.DrawLine(pos, totalSteeringForce);
+       
 
     }
 

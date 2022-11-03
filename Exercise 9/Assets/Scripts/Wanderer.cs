@@ -21,7 +21,7 @@ public class Wanderer : Agent
         worldSize.y = Camera.main.orthographicSize;
         worldSize.x = Camera.main.aspect * worldSize.y;
 
-        //worldSize *= 0.8f;
+        worldSize *= 0.8f;
     }
     // Start is called before the first frame update
     protected override void CalcSteeringForces()
