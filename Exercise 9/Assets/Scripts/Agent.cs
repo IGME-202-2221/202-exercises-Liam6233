@@ -20,6 +20,11 @@ public abstract class Agent : MonoBehaviour
     [SerializeField]
     float maxForce = 2f;
 
+    Vector3 pos;
+    float rad;
+
+    float timer;
+
     protected Vector3 totalSteeringForce;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +42,7 @@ public abstract class Agent : MonoBehaviour
         totalSteeringForce  = Vector3.ClampMagnitude(totalSteeringForce, maxForce);
   
         physicsObject.ApplyForce(totalSteeringForce);
+        timer += Time.deltaTime;
     }
 
     protected abstract void CalcSteeringForces();
@@ -72,26 +78,12 @@ public abstract class Agent : MonoBehaviour
     }
 
 
-    public Vector3 Wander1()
-    {
-
-        // first way of implementing Wander behavior
-        // seeking random position
-        Vector3 randomPos = transform.position;
-
-        randomPos.x += Random.Range(-10f, 10f);
-        randomPos.y+= Random.Range(-10f, 10f);
-       
-        return Seek(randomPos);
-
-
-    }
-
-    public Vector3 Wander2(float futureTime, float wanderRad)
+    public Vector3 Wander(float futureTime, float wanderRad)
     {
         // pick future position from a circle in front of object
         Vector3 wanderPos = GetFuturePosition(futureTime);
-
+        pos = wanderPos;
+        rad = wanderRad;
         float wanderAngle = Random.Range(0f, 360f);
         wanderPos.x += Mathf.Cos(wanderAngle) * wanderRad;
         wanderPos.y += Mathf.Sin(wanderAngle) * wanderRad;
@@ -99,25 +91,58 @@ public abstract class Agent : MonoBehaviour
         return Seek(wanderPos);
        
     }
+
+    public Vector3 Wander2()
+    {
+        float wanderAngle = Random.Range(-20f, 21f);
+        if(timer > 1)
+        {
+            float offset = Random.Range(-5f, 6f);
+            wanderAngle += offset;
+            timer = 0;
+        }
+        Vector3 wanderPos = physicsObject.Direction;
+
+        return Seek(wanderPos);
+        
+
+    }
     public Vector3 GetFuturePosition(float time)
     {
-        Vector3 futurePos = Vector3.zero;
-
-
         // simplest way to calculate it is by multiplying current velocity by time
-        futurePos = physicsObject.Velocity * time;
+        Vector3 futurePos =physicsObject.Velocity * time;
 
-        // or use acceleration
-
-        //futurePos = physicsObject.acceleration * time;
         return futurePos;
     }
 
-    public void StayInBounds()
+    public Vector3 StayInBounds(Vector2 worldSize, float futureTime)
     {
+
         // find future position,
         // check if going outside of camera bounds
         // apply steering force to push it in different direction
+        Vector3 position = GetFuturePosition(futureTime);
+
+        if(position.x >= worldSize.x|| position.x <= -worldSize.x || position.y >= worldSize.y || position.y <= -worldSize.y)
+        {
+            return Seek(Vector3.zero);
+        }
+        else
+        {
+            // if not worried about out of bounds, return no force
+            return Vector3.zero;
+        }
+        
+       
+
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(pos, rad);
+        Gizmos.DrawLine(pos, totalSteeringForce);
+
+    }
+
 
 }

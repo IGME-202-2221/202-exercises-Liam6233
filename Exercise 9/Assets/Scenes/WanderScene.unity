@@ -240,7 +240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5510282132376256414, guid: 2b4bfa313f1b6964d8ff2666aad9b8a3, type: 3}
       propertyPath: futureTime
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510282132376256414, guid: 2b4bfa313f1b6964d8ff2666aad9b8a3, type: 3}
+      propertyPath: wanderRadius
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5902401392980369927, guid: 2b4bfa313f1b6964d8ff2666aad9b8a3, type: 3}
       propertyPath: cam

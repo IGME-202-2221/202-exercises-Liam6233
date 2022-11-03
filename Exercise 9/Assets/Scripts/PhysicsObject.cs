@@ -84,7 +84,7 @@ public class PhysicsObject : MonoBehaviour
 
 
         
-        Bounce();
+        //Bounce();
 
     }
 
@@ -110,12 +110,15 @@ public class PhysicsObject : MonoBehaviour
             || transform.position.x >= cam.transform.position.x + width / 2)
         {
             velocity.x *= -1;
+            GetComponent<SpriteRenderer>().color = Color.red; /// for debugging
         }
         if (transform.position.y <= cam.transform.position.y - height / 2
             || transform.position.y >= cam.transform.position.y + height / 2)
         {
             velocity.y *= -1;
+            GetComponent<SpriteRenderer>().color = Color.red; // for debugging
         }
+        
     }
 
     public void ApplyForce(Vector3 force)
