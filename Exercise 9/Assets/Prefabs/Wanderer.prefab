@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7ea089612c551408b2924dcaf409bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: {x: 0, y: 0, z: 0}
   mass: 0
   frictionApplied: 0
   frictionCoef: 0
@@ -118,3 +119,6 @@ MonoBehaviour:
   physicsObject: {fileID: 5902401392980369927}
   maxSpeed: 2
   maxForce: 2
+  stayInBoundsWeight: 8
+  futureTime: 2
+  worldSize: {x: 0, y: 0}

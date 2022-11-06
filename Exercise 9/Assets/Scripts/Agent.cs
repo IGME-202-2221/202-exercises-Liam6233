@@ -23,7 +23,16 @@ public abstract class Agent : MonoBehaviour
     Vector3 pos;
     float rad;
 
-    float timer;
+    private float wanderAngle = 0f;
+
+    private float maxWanderAngle = 45f;
+
+    private float maxWanderChangePerSec = 10f;
+
+    
+
+    [SerializeField]
+    float stayInBoundsWeight = 3f;
 
     protected Vector3 totalSteeringForce;
     // Start is called before the first frame update
@@ -42,21 +51,21 @@ public abstract class Agent : MonoBehaviour
         totalSteeringForce  = Vector3.ClampMagnitude(totalSteeringForce, maxForce);
   
         physicsObject.ApplyForce(totalSteeringForce);
-        timer += Time.deltaTime;
     }
 
     protected abstract void CalcSteeringForces();
 
     // make sure targetPosition parameter is already in world space
-    public Vector3 Seek(Vector3 targetPosition)
+    public Vector3 Seek(Vector3 targetPosition, float seekWeight = 1f)
     {
+
         Vector3 desiredVelocity = targetPosition - transform.position;
 
         desiredVelocity = desiredVelocity.normalized * maxSpeed;
 
         Vector3 seekForce = desiredVelocity - physicsObject.Velocity;
 
-        return seekForce;
+        return seekForce * seekWeight;
     }
 
     public Vector3 Flee(Vector3 targetPosition)
@@ -78,24 +87,23 @@ public abstract class Agent : MonoBehaviour
     }
 
 
-    public Vector3 Wander(float futureTime, float wanderRad)
+    public Vector3 Wander(float wanderWeight = 1f)
     {
-        // pick future position from a circle in front of object
-        Vector3 wanderPos = GetFuturePosition(futureTime);
-        pos = wanderPos;
-        rad = wanderRad;
-        float wanderAngle = Random.Range(0f, 360f);
-        wanderPos.x += Mathf.Cos(wanderAngle * Mathf.Deg2Rad) * wanderRad;
-        wanderPos.y += Mathf.Sin(wanderAngle * Mathf.Deg2Rad) * wanderRad;
+        float maxWanderChange = maxWanderChangePerSec * Time.deltaTime;
+        wanderAngle += Random.Range(-maxWanderChange, maxWanderChange);
 
-        return Seek(wanderPos);
-       
+        wanderAngle = Mathf.Clamp(wanderAngle, -maxWanderAngle, maxWanderAngle);
+
+        Vector3 wanderTarget = Quaternion.Euler(0, 0, wanderAngle) * physicsObject.Direction.normalized + physicsObject.Position;
+
+        return Seek(wanderTarget);
+             
     }
 
     public Vector3 GetFuturePosition(float time)
     {
         // simplest way to calculate it is by multiplying current velocity by time
-        Vector3 futurePos =physicsObject.Velocity * time;
+        Vector3 futurePos = physicsObject.Position + physicsObject.Velocity * time;
 
         return futurePos;
     }
@@ -110,7 +118,7 @@ public abstract class Agent : MonoBehaviour
 
         if(position.x >= worldSize.x|| position.x <= -worldSize.x || position.y >= worldSize.y || position.y <= -worldSize.y)
         {
-            return Seek(Vector3.zero);
+            return Seek(Vector3.zero, stayInBoundsWeight);
         }
         else
         {
@@ -128,6 +136,8 @@ public abstract class Agent : MonoBehaviour
        
 
     }
+
+
 
 
 }

@@ -58,6 +58,7 @@ public class PhysicsObject : MonoBehaviour
         width = height * cam.aspect;
 
         position = transform.position;
+        direction = Random.insideUnitCircle.normalized;
     }
 
     // Update is called once per frame
@@ -81,9 +82,6 @@ public class PhysicsObject : MonoBehaviour
         transform.position = position;
 
         acceleration = Vector3.zero;
-
-
-        
         //Bounce();
 
     }

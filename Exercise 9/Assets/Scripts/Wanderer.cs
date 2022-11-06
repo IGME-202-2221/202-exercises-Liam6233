@@ -8,8 +8,6 @@ public class Wanderer : Agent
     [SerializeField]
     float futureTime = 2f;
 
-    [SerializeField]
-    float wanderRadius = 2f;
 
     [SerializeField]
     Vector2 worldSize;
@@ -21,16 +19,17 @@ public class Wanderer : Agent
         worldSize.y = Camera.main.orthographicSize;
         worldSize.x = Camera.main.aspect * worldSize.y;
 
-        worldSize *= 0.8f;
+        //worldSize *= 0.8f;
     }
     // Start is called before the first frame update
     protected override void CalcSteeringForces()
     {
-        totalSteeringForce += Wander(futureTime, wanderRadius);
-    
+        totalSteeringForce +=  Wander();
         boundsForce = StayInBounds(worldSize, futureTime);
         totalSteeringForce += boundsForce;
     }
+
+
 
 
 
