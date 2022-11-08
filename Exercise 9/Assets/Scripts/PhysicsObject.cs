@@ -9,7 +9,7 @@ public class PhysicsObject : MonoBehaviour
     // fields
     private Vector3 direction = Vector3.zero;
     private Vector3 velocity = Vector3.zero;
-    public Vector3 acceleration;
+    public Vector3 acceleration = Vector3.zero;
     Vector3 position = Vector3.negativeInfinity;
     
 
@@ -48,17 +48,29 @@ public class PhysicsObject : MonoBehaviour
 
     //needed for bounce method
     [SerializeField]
-    Camera cam;
-    static float height;
-    float width;
+    //public Camera cam;
+    //static float height;
+    //float width;
     // Start is called before the first frame update
     void Start()
     {
-        height = 2f * cam.orthographicSize;
-        width = height * cam.aspect;
+        
 
         position = transform.position;
         direction = Random.insideUnitCircle.normalized;
+    }
+
+    private void Awake()
+    {
+        //height = 2f * cam.orthographicSize;
+        //width = height * cam.aspect;
+
+        direction = Vector3.zero;
+        velocity = Vector3.zero;
+        acceleration = Vector3.zero;
+        position = transform.position;
+        direction = Random.insideUnitCircle.normalized;
+        mass = 1;
     }
 
     // Update is called once per frame
@@ -77,8 +89,10 @@ public class PhysicsObject : MonoBehaviour
 
         position += velocity * Time.deltaTime;
 
-        direction = velocity.normalized;
-
+        if (velocity != Vector3.zero)
+        {
+            direction = velocity.normalized;
+        }
         transform.position = position;
 
         acceleration = Vector3.zero;
@@ -102,6 +116,7 @@ public class PhysicsObject : MonoBehaviour
         ApplyForce(force * mass);
     }
 
+    /*
     private void Bounce()
     {
         if(transform.position.x <= cam.transform.position.x - width / 2 
@@ -118,7 +133,7 @@ public class PhysicsObject : MonoBehaviour
         }
         
     }
-
+    */
     public void ApplyForce(Vector3 force)
     {
         acceleration += force / mass;

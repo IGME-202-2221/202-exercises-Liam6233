@@ -29,7 +29,8 @@ public abstract class Agent : MonoBehaviour
 
     private float maxWanderChangePerSec = 10f;
 
-    
+    AgentManager manager;
+
 
     [SerializeField]
     float stayInBoundsWeight = 3f;
@@ -39,6 +40,11 @@ public abstract class Agent : MonoBehaviour
     void Start()
     {
         physicsObject = GetComponent<PhysicsObject>();
+    }
+
+    public void Init(AgentManager manager)
+    {
+        this.manager = manager;
     }
 
     // Update is called once per frame
@@ -133,10 +139,27 @@ public abstract class Agent : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(pos, rad);
-       
-
+   
     }
+    
+    public Vector3 Seperation()
+    {
+        Vector3 seperateForce = Vector3.zero;
+        float sqrDistance;
 
+        foreach(Agent other in manager.Agents)
+        {
+            sqrDistance = Vector3.SqrMagnitude(physicsObject.Position - other.physicsObject.Position);
+
+            if(sqrDistance != 0)
+            {
+                seperateForce += Flee(other.physicsObject.Position) * (1f/ sqrDistance);
+            }
+            
+        }
+
+        return seperateForce;
+    }
 
 
 
